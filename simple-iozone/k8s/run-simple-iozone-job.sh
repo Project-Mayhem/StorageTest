@@ -8,8 +8,9 @@
 
 
 # k8s commands
-#KUBECTL="kubectl" # for local minikube on Mac
-KUBECTL="oc"      # for main system, recommended by OpenShift
+KUBECTL="kubectl" # for local minikube on Mac
+#KUBECTL="oc"      # for main system, recommended by OpenShift
+K8S_NAMESPACE="default"
 
 if [ "${KUBECTL}" = "oc" ]
 then
@@ -25,8 +26,8 @@ CWD=${PWD}
 STARTUP_WAIT="60s"
 
 # PVC
-PVC_YAML="simple-iozone-ceph.yml"
-PVC_NAME="simple-iozone-pvc-ceph"
+PVC_YAML="simple-iozone-gpfs.yml"
+PVC_NAME="simple-iozone-pvc-gpfs"
 
 # Job
 JOB_YAML="simple-iozone-job.yml"

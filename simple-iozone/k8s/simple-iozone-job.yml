@@ -11,7 +11,7 @@ spec:
       volumes:
       - name: simple-iozone-data-volume
         persistentVolumeClaim: 
-          claimName: simple-iozone-pvc-ceph
+          claimName: simple-iozone-pvc-gpfs
 
       containers:
       - name: iozone
