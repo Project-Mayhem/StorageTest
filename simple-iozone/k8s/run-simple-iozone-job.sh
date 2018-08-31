@@ -23,7 +23,7 @@ fi
 
 # Useful variables
 CWD=${PWD}
-STARTUP_WAIT="60s"
+STARTUP_WAIT="10s"
 
 # PVC
 PVC_YAML="simple-iozone-gpfs.yml"

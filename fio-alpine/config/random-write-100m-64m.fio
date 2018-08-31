@@ -1,0 +1,13 @@
+[global]
+ioengine=libaio
+rw=randwrite
+numjobs=1
+direct=1
+bs=64m
+filename=/data/64mrandrw100m.data
+runtime=5
+time_based=1
+iodepth=8
+size=100m
+#gtod_reduce=1
+[randwritejob-100m-64m]

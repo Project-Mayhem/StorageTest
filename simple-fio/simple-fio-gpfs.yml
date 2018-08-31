@@ -1,0 +1,14 @@
+kind: PersistentVolumeClaim
+apiVersion: v1
+metadata:
+  annotations:
+    volume.beta.kubernetes.io/storage-class: "spectrum-scale-fileset"
+#    volume.beta.kubernetes.io/storage-provisioner: ubiquity/flex
+  name: "simple-fio-pvc-gpfs"
+#  namespace: default
+spec:
+  accessModes:
+  - ReadWriteOnce
+  resources:
+    requests:
+      storage: 100Gi

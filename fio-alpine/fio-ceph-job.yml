@@ -1,0 +1,27 @@
+# Initial fio job YML with PVC
+#
+apiVersion: batch/v1
+kind: Job
+metadata:
+  name: fio-job
+  namespace: meadowgate
+spec:
+  completions: 1
+  template:
+    metadata:	  
+      name: fio-job
+    spec:
+      volumes:
+      - name: fio-data-volume
+        persistentVolumeClaim: 
+          claimName: fio-pvc-ceph
+
+      containers:
+      - name: fio
+        image: ranada/fio:0.0.1
+        imagePullPolicy: Always
+
+        volumeMounts:
+        - name: fio-data-volume
+          mountPath: "/data"
+      restartPolicy: Never

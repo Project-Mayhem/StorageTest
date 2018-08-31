@@ -1,0 +1,13 @@
+[global]
+ioengine=libaio
+rw=randwrite
+numjobs=1
+direct=1
+bs=8k
+filename=/data/8krandrw500m.data
+runtime=5
+time_based=1
+iodepth=8
+size=500m
+#gtod_reduce=1
+[randwritejob-500m-8k]

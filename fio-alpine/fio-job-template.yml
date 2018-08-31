@@ -1,0 +1,52 @@
+apiVersion: batch/v1
+kind: Job
+metadata:
+  name: __JOB_NAME__
+  namespace: __NAMESPACE__
+spec:
+  completions: __COMPLETIONS__
+  template:
+    metadata:	  
+      name: __JOB_NAME__
+    spec:
+      volumes:
+##      - name: scp-secret
+##        secret:
+##          secretName: "scp-secret"
+      - name: data-volume
+        persistentVolumeClaim: 
+          claimName: __PVC_NAME__
+
+      containers:
+      - name: fio
+        image: __CONTAINER_AND_VERSION__
+        imagePullPolicy: Always
+        env:
+        - name: TEST_END_TIME
+          value: "__TEST_END_TIME__"
+        - name: ELASTICSEARCH_HOST
+          value: "__ELASTICSEARCH_HOST__"
+        - name: ELASTICSEARCH_USER
+          value: "__ELASTICSEARCH_USER__"
+        - name: ELASTICSEARCH_PASSWORD
+          value: "__ELASTICSEARCH_PASSWORD__"
+        - name: STAY_ALIVE_SLEEP_TIME
+          value: "__STAY_ALIVE_SLEEP_TIME__"
+        - name: LOGSTASH_INDEX
+          value: "__LOGSTASH_INDEX__"
+        - name: PERSISTENT_STORAGE_NAME
+          value: "__PERSISTENT_STORAGE_NAME__"
+        - name: PERSISTENT_STORAGE_VERSION
+          value: "__PERSISTENT_STORAGE_VERSION__"
+        - name: JOB_NAME
+          value: "__JOB_NAME__"
+        - name: RESULTS_WEBSERVER
+          value: "__RESULTS_WEBSERVER__"  
+
+        volumeMounts:
+##        - name: scp-secret
+##          mountPath: /home/iozone
+##          readOnly: true
+        - name: data-volume
+          mountPath: "/data"
+      restartPolicy: Never

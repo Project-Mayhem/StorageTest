@@ -1,0 +1,25 @@
+apiVersion: batch/v1
+kind: Job
+metadata:
+  name: simple-fio-job
+spec:
+  completions: 1
+  template:
+    metadata:	  
+      name: simple-fio-job
+    spec:
+      volumes:
+      - name: simple-fio-data-volume
+        persistentVolumeClaim: 
+          claimName: simple-fio-pvc-gpfs
+
+      containers:
+      - name: fio
+        image: 10.10.2.9:30001/fio-alpine:v1.0
+#        command: [ "/bin/sh", "-c", "/home/fio/keep-alive.sh" ]  # uncomment if you would like to run the container and exec in
+        imagePullPolicy: Always
+
+        volumeMounts:
+        - name: simple-fio-data-volume
+          mountPath: "/data"
+      restartPolicy: Never

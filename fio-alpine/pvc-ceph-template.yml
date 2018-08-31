@@ -1,0 +1,14 @@
+# Persistent Volume Claim
+kind: PersistentVolumeClaim
+apiVersion: v1
+metadata:
+  name: __PVC_NAME__
+  annotations:
+    #volume.alpha.kubernetes.io/storage-class: standard
+    v1.storage.k8s.io/storage-class: ceph
+spec:
+  accessModes:
+    - ReadWriteOnce
+  resources:
+    requests:
+      storage: __PVC_SIZE__

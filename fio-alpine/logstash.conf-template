@@ -1,0 +1,29 @@
+input {
+	file {
+		path => "/data/output.txt"
+		start_position => "beginning"
+		tags => ["fio","test"]
+		sincedb_path => "/data/.sincedb"
+	}
+}
+
+filter {
+	if [message] =~ /^{"/ {
+		json {
+			source => "message"
+		}
+	} else {
+		drop { } 
+	}
+}
+
+output {
+	if "_jsonparsefailure" not in [tags] {
+		elasticsearch {
+			hosts => ["__ELASTICSEARCH_HOST__"]
+			user => __ELASTICSEARCH_USER__
+			password => __ELASTICSEARCH_PASSWORD__
+			index => "__LOGSTASH_INDEX__"
+		}
+	}
+}
